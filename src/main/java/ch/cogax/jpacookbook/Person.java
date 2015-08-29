@@ -15,99 +15,98 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
-/**
- * Beispiel welches die Möglichkeiten der Basic Attributes veranschaulicht.
- */
 @Entity
 public class Person implements Serializable {
 
-	public enum Gender { MALE, FEMALE };
-	
-	private static final long serialVersionUID = 1L;
+    public enum Gender {
+	MALE, FEMALE
+    };
 
-	@Id
+    private static final long serialVersionUID = 1L;
+
+    @Id
     @GeneratedValue
     private Long id;
-    
-	@Basic
-	@Column(name = "F_NAME", nullable = false, length = 200)
+
+    @Basic
+    @Column(name = "F_NAME", nullable = false, length = 200)
     private String firstname;
-	
-	// The @Basic is not required in general because it is the default.
-	@Column(name = "L_NAME", nullable = false, length = 200)
+
+    // The @Basic is not required in general because it is the default.
+    @Column(name = "L_NAME", nullable = false, length = 200)
     private String lastname;
 
-	@Column(precision=8, scale=2)
-	private BigDecimal salary;
-	
-	@Temporal(TemporalType.DATE)
-	private Calendar birthday;
-	
+    @Column(precision = 8, scale = 2)
+    private BigDecimal salary;
+
+    @Temporal(TemporalType.DATE)
+    private Calendar birthday;
+
     @Enumerated(EnumType.STRING)
     private Gender gender;
-	
-	@Transient
-	private String state;
-    
+
+    @Transient
+    private String state;
+
     Person() {
-        super();
+	super();
     }
 
     public Person(final String firstname, final String lastname) {
-        super();
-        this.firstname = firstname;
-        this.lastname = lastname;
+	super();
+	this.firstname = firstname;
+	this.lastname = lastname;
     }
 
     public Gender getGender() {
-		return gender;
-	}
+	return gender;
+    }
 
-	public void setGender(Gender gender) {
-		this.gender = gender;
-	}
+    public void setGender(Gender gender) {
+	this.gender = gender;
+    }
 
-	public BigDecimal getSalary() {
-		return salary;
-	}
+    public BigDecimal getSalary() {
+	return salary;
+    }
 
-	public void setSalary(BigDecimal salary) {
-		this.salary = salary;
-	}
+    public void setSalary(BigDecimal salary) {
+	this.salary = salary;
+    }
 
-	public Calendar getBirthday() {
-		return birthday;
-	}
+    public Calendar getBirthday() {
+	return birthday;
+    }
 
-	public void setBirthday(Calendar birthday) {
-		this.birthday = birthday;
-	}
+    public void setBirthday(Calendar birthday) {
+	this.birthday = birthday;
+    }
 
-	public String getState() {
-		return state;
-	}
+    public String getState() {
+	return state;
+    }
 
-	public void setState(String state) {
-		this.state = state;
-	}
+    public void setState(String state) {
+	this.state = state;
+    }
 
-	public String getFirstname() {
-        return firstname;
+    public String getFirstname() {
+	return firstname;
     }
 
     public void setFirstname(final String firstname) {
-        this.firstname = firstname;
+	this.firstname = firstname;
     }
 
     public String getLastname() {
-        return lastname;
+	return lastname;
     }
 
     public void setLastname(final String lastname) {
-        this.lastname = lastname;
+	this.lastname = lastname;
     }
 
     public Long getId() {
-        return id;
+	return id;
     }
 }
