@@ -55,8 +55,9 @@ public class RecipeRepository implements IRecipeRepository {
 
     @Override
     public void delete(Recipe entity) {
-	// TODO Auto-generated method stub
-
+	entityManager.getTransaction().begin();
+	entityManager.remove(entity);
+	entityManager.getTransaction().commit();
     }
 
     @Override

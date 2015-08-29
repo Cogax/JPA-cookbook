@@ -89,6 +89,21 @@ public class RecipeTest {
 	Assert.assertEquals(1, repo.findByTitle("test5-neu").size());
     }
 
+    @Test
+    public void testDelete() {
+	repo.save(getRecipe("test6"));
+
+	ArrayList<Recipe> recipes = new ArrayList<Recipe>(
+		repo.findByTitle("test6"));
+
+	Assert.assertEquals(1, recipes.size());
+
+	Recipe recipe = recipes.get(0);
+	repo.delete(recipe);
+
+	Assert.assertEquals(0, repo.findByTitle("test6").size());
+    }
+
     private Recipe getRecipe(String title) {
 	Recipe recipe = new Recipe();
 	recipe.setTitle(title);
