@@ -58,6 +58,19 @@ public class RecipeTest {
 	Assert.assertEquals(3, recipes.size());
     }
 
+    @Test
+    public void testAddRecipes_TestFindById() {
+	repo.save(getRecipe("test4-1"));
+	repo.save(getRecipe("test4-2"));
+	repo.save(getRecipe("test4-3"));
+
+	ArrayList<Recipe> recipes = new ArrayList<Recipe>(repo.findAll());
+
+	for (Recipe recipe : recipes) {
+	    Assert.assertEquals(recipe, repo.findById(recipe.getId()));
+	}
+    }
+
     private Recipe getRecipe(String title) {
 	Recipe recipe = new Recipe();
 	recipe.setTitle(title);

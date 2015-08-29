@@ -35,9 +35,11 @@ public class RecipeRepository implements IRecipeRepository {
     }
 
     @Override
-    public Recipe findById() {
-	// TODO Auto-generated method stub
-	return null;
+    public Recipe findById(Long id) {
+	final TypedQuery<Recipe> query = entityManager.createQuery(
+		"SELECT r from Recipe r WHERE r.id = :id", Recipe.class)
+		.setParameter("id", id);
+	return query.getSingleResult();
     }
 
     @Override

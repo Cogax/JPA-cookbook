@@ -9,7 +9,7 @@ public interface IRecipeRepository {
 
     public Collection<Recipe> findAll();
 
-    public Recipe findById();
+    public Recipe findById(Long id);
 
     public void save(Recipe entity);
 
