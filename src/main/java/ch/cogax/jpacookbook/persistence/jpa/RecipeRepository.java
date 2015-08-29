@@ -29,8 +29,9 @@ public class RecipeRepository implements IRecipeRepository {
 
     @Override
     public Collection<Recipe> findAll() {
-	// TODO Auto-generated method stub
-	return null;
+	final TypedQuery<Recipe> query = entityManager.createQuery(
+		"SELECT r from Recipe r", Recipe.class);
+	return query.getResultList();
     }
 
     @Override

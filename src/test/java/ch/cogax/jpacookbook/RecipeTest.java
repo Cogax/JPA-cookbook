@@ -25,19 +25,37 @@ public class RecipeTest {
     }
 
     @Test
-    public void testAddARecipe_FindByTitleSizeIsMoreThanZero() {
+    public void testAddARecipe_FindByTitleSizeIsOne() {
 	repo.save(getRecipe("test1"));
 
 	ArrayList<Recipe> recipesFoundByTitle = new ArrayList<Recipe>(
 		repo.findByTitle("test1"));
 
 	Assert.assertNotNull(recipesFoundByTitle);
-	Assert.assertTrue(recipesFoundByTitle.size() > 0);
+	Assert.assertTrue(recipesFoundByTitle.size() == 1);
     }
 
     @Test
-    public void testAddMultipleRecipesWithSameTitle_FindByTitleSizeIsCorrect() {
+    public void testAddTwoRecipesWithSameTitle_FindByTitleSizeIsTwo() {
+	repo.save(getRecipe("test2"));
+	repo.save(getRecipe("test2"));
 
+	ArrayList<Recipe> recipesFoundByTitle = new ArrayList<Recipe>(
+		repo.findByTitle("test2"));
+
+	Assert.assertNotNull(recipesFoundByTitle);
+	Assert.assertTrue(recipesFoundByTitle.size() == 2);
+    }
+
+    @Test
+    public void testAddThreeRecipes_FindAllReturnsThreeRecipes() {
+	repo.save(getRecipe("test3-1"));
+	repo.save(getRecipe("test3-2"));
+	repo.save(getRecipe("test3-3"));
+
+	ArrayList<Recipe> recipes = new ArrayList<Recipe>(repo.findAll());
+
+	Assert.assertEquals(3, recipes.size());
     }
 
     private Recipe getRecipe(String title) {
