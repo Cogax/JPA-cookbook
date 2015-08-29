@@ -19,4 +19,56 @@ public class Ingredient {
 
     @Column(nullable = true, length = 250)
     private String comment;
+
+    /**
+     * @return the id
+     */
+    public Long getId() {
+	return id;
+    }
+
+    /**
+     * @return the quantity
+     */
+    public String getQuantity() {
+	return quantity;
+    }
+
+    /**
+     * @param quantity
+     *            the quantity to set
+     */
+    public void setQuantity(String quantity) {
+	this.quantity = quantity;
+    }
+
+    /**
+     * @return the description
+     */
+    public String getDescription() {
+	return description;
+    }
+
+    /**
+     * @param description
+     *            the description to set
+     */
+    public void setDescription(String description) {
+	this.description = description;
+    }
+
+    /**
+     * @return the comment
+     */
+    public String getComment() {
+	return comment;
+    }
+
+    /**
+     * @param comment
+     *            the comment to set
+     */
+    public void setComment(String comment) {
+	this.comment = comment;
+    }
 }
