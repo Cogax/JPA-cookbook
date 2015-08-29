@@ -1,6 +1,9 @@
 package ch.cogax.jpacookbook;
 
+import java.util.ArrayList;
+
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import ch.cogax.jpacookbook.entity.Image;
@@ -10,12 +13,31 @@ import ch.cogax.jpacookbook.persistence.IRecipeRepository;
 import ch.cogax.jpacookbook.persistence.jpa.RecipeRepository;
 
 public class RecipeTest {
+    private static IRecipeRepository repo;
+
+    @BeforeClass
+    public static void setUp() {
+	repo = new RecipeRepository("testDB");
+    }
+
+    public static void tearDown() {
+	repo.close();
+    }
 
     @Test
-    public void testAddARecipe() {
-	IRecipeRepository repo = new RecipeRepository("testDB");
-	repo.save(getRecipe("test"));
-	Assert.assertTrue(repo.findByTitle("test").size() > 0);
+    public void testAddARecipe_FindByTitleSizeIsMoreThanZero() {
+	repo.save(getRecipe("test1"));
+
+	ArrayList<Recipe> recipesFoundByTitle = new ArrayList<Recipe>(
+		repo.findByTitle("test1"));
+
+	Assert.assertNotNull(recipesFoundByTitle);
+	Assert.assertTrue(recipesFoundByTitle.size() > 0);
+    }
+
+    @Test
+    public void testAddMultipleRecipesWithSameTitle_FindByTitleSizeIsCorrect() {
+
     }
 
     private Recipe getRecipe(String title) {

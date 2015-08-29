@@ -14,4 +14,6 @@ public interface IRecipeRepository {
     public void save(Recipe entity);
 
     public void delete(Recipe entity);
+
+    public void close();
 }

@@ -56,4 +56,8 @@ public class RecipeRepository implements IRecipeRepository {
 
     }
 
+    @Override
+    public void close() {
+	entityManager.close();
+    }
 }
