@@ -2,6 +2,7 @@ package ch.cogax.jpacookbook;
 
 import java.util.ArrayList;
 
+import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -20,8 +21,47 @@ public class RecipeTest {
 	repo = new RecipeRepository("testDB");
     }
 
+    @AfterClass
     public static void tearDown() {
 	repo.close();
+    }
+
+    @Test
+    public void testAddRecipe_TestRecipeProperties() {
+	Recipe r = getRecipe("test0");
+	repo.save(r);
+
+	Recipe recipe = new ArrayList<Recipe>(repo.findByTitle("test0")).get(0);
+
+	Assert.assertEquals(r.getTitle(), recipe.getTitle());
+	Assert.assertEquals(r.getPreample(), recipe.getPreample());
+	Assert.assertEquals(r.getPreparation(), recipe.getPreparation());
+	Assert.assertEquals(r.getTags().size(), recipe.getTags().size());
+	for (String tag : r.getTags()) {
+	    Assert.assertTrue(recipe.getTags().contains(tag));
+	}
+	Assert.assertEquals(r.getNoOfPerson(), recipe.getNoOfPerson());
+	Assert.assertEquals(r.getImage().getDescription(), recipe.getImage()
+		.getDescription());
+	Assert.assertEquals(r.getImage().getUrl(), recipe.getImage().getUrl());
+	Assert.assertEquals(r.getIngredients().size(), recipe.getIngredients()
+		.size());
+	ArrayList<Ingredient> oldIngredients = new ArrayList<Ingredient>(
+		r.getIngredients());
+	ArrayList<Ingredient> newIngredients = new ArrayList<Ingredient>(
+		recipe.getIngredients());
+	Assert.assertEquals(oldIngredients.get(0).getComment(), newIngredients
+		.get(0).getComment());
+	Assert.assertEquals(oldIngredients.get(0).getDescription(),
+		newIngredients.get(0).getDescription());
+	Assert.assertEquals(oldIngredients.get(5).getQuantity(), newIngredients
+		.get(5).getQuantity());
+	Assert.assertEquals(oldIngredients.get(5).getComment(), newIngredients
+		.get(5).getComment());
+	Assert.assertEquals(oldIngredients.get(5).getDescription(),
+		newIngredients.get(5).getDescription());
+	Assert.assertEquals(oldIngredients.get(5).getQuantity(), newIngredients
+		.get(5).getQuantity());
     }
 
     @Test

@@ -12,7 +12,6 @@
           <!-- Die Registrierung aller Klassen ist in Verbindung mit einem JEE Container nicht zwingen
                Werden mehr als eine Persistence-Unit verwendet, so ist die Registrierung zu empfehlen
                Wird JPA im Java SE Umfeld verwendet, so ist die Registrierung zwingend -->
-          <class>ch.cogax.jpacookbook.Person</class>
 			<class>ch.cogax.jpacookbook.entity.Image</class>
 			<class>ch.cogax.jpacookbook.entity.Ingredient</class>
 			<class>ch.cogax.jpacookbook.entity.Recipe</class>
