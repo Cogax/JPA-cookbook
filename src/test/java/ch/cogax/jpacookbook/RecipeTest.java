@@ -66,9 +66,27 @@ public class RecipeTest {
 
 	ArrayList<Recipe> recipes = new ArrayList<Recipe>(repo.findAll());
 
+	Assert.assertNotNull(recipes);
 	for (Recipe recipe : recipes) {
 	    Assert.assertEquals(recipe, repo.findById(recipe.getId()));
 	}
+    }
+
+    @Test
+    public void testUpdate() {
+	repo.save(getRecipe("test5"));
+
+	ArrayList<Recipe> recipes = new ArrayList<Recipe>(
+		repo.findByTitle("test5"));
+
+	Assert.assertEquals(1, recipes.size());
+
+	Recipe recipe = recipes.get(0);
+	recipe.setTitle("test5-neu");
+	repo.save(recipe);
+
+	Assert.assertEquals(0, repo.findByTitle("test5").size());
+	Assert.assertEquals(1, repo.findByTitle("test5-neu").size());
     }
 
     private Recipe getRecipe(String title) {
